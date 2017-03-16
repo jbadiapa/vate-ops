@@ -8,9 +8,21 @@ vagrant up all  --provider virtualbox
 #vagrant up kibana --provider virtualbox
 #vagrant up grafana --provider virtualbox
 #vagrant up collectd --provider virtualbox
-git clone https://github.com/centos-opstools/opstools-ansible.git
+
+# Git clone if the directory does not exits
+if [ ! opstools-ansible ]; then 
+ git clone https://github.com/centos-opstools/opstools-ansible.git
+fi
+
 cd opstools-ansible
-git review -d 4063
+
+# Get the review if it is given  
+if [ #$ == 1];
+ REVIEW = $1
+ git review -d $REVIEW
+else
+ fit checkout master
+fi
 
 cd inventory
 cat >hosts<<EOF
@@ -25,6 +37,7 @@ cat >hosts<<EOF
 192.168.33.51 ansible_user=vagrant ansible_ssh_extra_args='-i ../.vagrant/machines/all/virtualbox/private_key -o UserKnownHostsFile=/dev/null  -o StrictHostKeyChecking=no' ansible_become=True ansible_become_user=root ansible_become_method=sudo
 EOF
 
+
 cd ..
 pwd
-ansible-playbook -i inventory playbook.yml
+#ansible-playbook -i inventory playbook.yml
