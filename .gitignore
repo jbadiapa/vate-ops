@@ -1,2 +1,5 @@
 .vagrant
 opstools-ansible
+client
+server
+testca

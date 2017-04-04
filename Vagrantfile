@@ -98,4 +98,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    osmig.vm.hostname = "os-mig"
   end
 
+  config.vm.define "rpmbuilder" do |rpmbuilder|
+   rpmbuilder.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp"
+   rpmbuilder.vm.network "private_network", ip: "192.168.33.80"
+   rpmbuilder.vm.hostname = "rpmbuilder"
+  end
+
+  config.vm.define "ceph" do |ceph|
+   ceph.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp"
+   ceph.vm.network "private_network", ip: "192.168.33.79"
+   ceph.vm.hostname = "ceph"
+  end
+
 end
