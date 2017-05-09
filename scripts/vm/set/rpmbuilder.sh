@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum install fedora-review mock fedora-packager -y
+yum install fedora-review mock  -y
 
 cd /home/vagrant
 mkdir rpmbuild

@@ -9,6 +9,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  fedora.vm.box = 'fedora/25-cloud-base'
 	  fedora.vm.provision "shell", path: "scripts/vm/init/init.sh"
 	  fedora.vm.provision "shell", path: "scripts/vm/init/addSSHkey.sh"
+	  fedora.vm.provision "shell", path: "scripts/vm/set/rpmbuilder.sh"
+          rpmbuilder.vm.provision "shell", inline: "yum -y install fedora-packager git"
           fedora.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp" 
 	  fedora.vm.network "private_network", ip: "192.168.33.91", :mac => "0800271234a0"
           fedora.vm.hostname = "fedora"
@@ -114,6 +116,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    rpmbuilder.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp"
    rpmbuilder.vm.network "private_network", ip: "192.168.33.80"
    rpmbuilder.vm.hostname = "rpmbuilder"
+   rpmbuilder.vm.provision "shell", path: "scripts/vm/set/rpmbuilder.sh"
    rpmbuilder.vm.provision "shell", inline: "yum -y install centos-packager git"
   end
 
