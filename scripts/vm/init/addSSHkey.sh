@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -d "/root/.ssh" ]; then
+	mkdir -p "/root/.ssh"
+	cat >/root/.ssh/authorized_keys<<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDjoaPwjFHZuaR085o6DWOQcNFUXHnWZd3I6MO4uLb+hGRJur75E7K3zy7uZwSeaOD2SEFynsIQWyystdU7nySSgHnGCnEXFX4C3UNsbRJayJ1na4ING/FgEJaa7rXCB55rgUBFrrmQCl0+GPjDctFZTmP8cH0QLsIqXeFzrvZoRWYlpaiPtSGjcwJ9N8cVODJBtRJExZZCmudiVyNvyX0V6fQSpZCr7PEHIxZB49IBaDwvYex9L6GfKglM6V4QuGbvpJq2l0ms9AKkCMRgiOlYJUcj8SRYf4s812CeClIf1aJtz6EDuLFvEXSuL13GNZbhaas9gTTJKOKB3Nj0noVF jbadiapa@skyblue
+EOF
+else
+	cat >>/root/.ssh/authorized_keys<<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDjoaPwjFHZuaR085o6DWOQcNFUXHnWZd3I6MO4uLb+hGRJur75E7K3zy7uZwSeaOD2SEFynsIQWyystdU7nySSgHnGCnEXFX4C3UNsbRJayJ1na4ING/FgEJaa7rXCB55rgUBFrrmQCl0+GPjDctFZTmP8cH0QLsIqXeFzrvZoRWYlpaiPtSGjcwJ9N8cVODJBtRJExZZCmudiVyNvyX0V6fQSpZCr7PEHIxZB49IBaDwvYex9L6GfKglM6V4QuGbvpJq2l0ms9AKkCMRgiOlYJUcj8SRYf4s812CeClIf1aJtz6EDuLFvEXSuL13GNZbhaas9gTTJKOKB3Nj0noVF jbadiapa@skyblue
+EOF
+
+
+fi

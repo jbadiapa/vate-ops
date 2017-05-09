@@ -4,8 +4,20 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "fedora" do |fedora|
+	  fedora.vm.box = 'fedora/25-cloud-base'
+	  fedora.vm.provision "shell", path: "scripts/vm/init/init.sh"
+	  fedora.vm.provision "shell", path: "scripts/vm/init/addSSHkey.sh"
+          fedora.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp" 
+	  fedora.vm.network "private_network", ip: "192.168.33.91", :mac => "0800271234a0"
+          fedora.vm.hostname = "fedora"
+  end
+
   config.vm.box = "centos/7"
   config.vm.provision "shell", path: "scripts/vm/init/init.sh"
+  config.vm.provision "shell", path: "scripts/vm/init/addSSHkey.sh"
+
   # all in one
   config.vm.define "all" do |all|
    all.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.52", :mac => "080027123450"
@@ -102,6 +114,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    rpmbuilder.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp"
    rpmbuilder.vm.network "private_network", ip: "192.168.33.80"
    rpmbuilder.vm.hostname = "rpmbuilder"
+   rpmbuilder.vm.provision "shell", inline: "yum -y install centos-packager git"
   end
 
   config.vm.define "ceph" do |ceph|
@@ -110,4 +123,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    ceph.vm.hostname = "ceph"
   end
 
+  config.vm.define "opsGate" do |opsGate|
+   opsGate.vm.network "public_network", bridge: "enp0s31f6", type: "dhcp"
+   opsGate.vm.network "private_network", ip: "192.168.33.90"
+   opsGate.vm.hostname = "opsGate"
+  end
 end

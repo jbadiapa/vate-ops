@@ -34,9 +34,9 @@ fi
 cd inventory
 cat >hosts<<EOF
 [am_hosts]
-192.168.33.51
 [pm_hosts]
 [logging_hosts]
+192.168.33.51
 
 [targets]
 192.168.33.51 ansible_user=vagrant ansible_ssh_extra_args='-i ../.vagrant/machines/all/virtualbox/private_key -o UserKnownHostsFile=/dev/null  -o StrictHostKeyChecking=no' ansible_become=True ansible_become_user=root ansible_become_method=sudo
@@ -72,8 +72,8 @@ EOF
 cat >params.yml<<EOF
 ---
 
-rabbitmq_use_ssl: true
-sensu_rabbitmq_with_ssl: true
+rabbitmq_use_ssl: false 
+sensu_rabbitmq_with_ssl: false
 EOF
 set_ssl_var params.yml rabbitmq_ssl_cacert ../testca/cacert.pem
 set_ssl_var params.yml rabbitmq_ssl_cert ../server/cert.pem 
